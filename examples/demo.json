@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "title": "虚构演示工作区",
+    "scope": "仅含虚构示例：2 个问题共享 1 个实验。所有数值均为人工生成，不是真实研究。",
+    "campaigns": [
+      "虚构演示"
+    ],
+    "sourcePolicy": "虚构演示数据，仅用于检验工作台。"
+  },
+  "sourcePaths": [
+    "report.md",
+    "measurements.csv",
+    "figure.svg"
+  ],
+  "entities": [
+    {
+      "id": "q-demo",
+      "type": "question",
+      "title": "缓存是否缩短处理时间？",
+      "summary": "虚构问题，用于演示从问题追溯实验。",
+      "campaign": "虚构演示",
+      "method": "演示方法",
+      "status": "已完成",
+      "sources": [
+        "report.md"
+      ],
+      "criterion": "在同一虚构输入下比较两种设置。"
+    },
+    {
+      "id": "q-repeat",
+      "type": "question",
+      "title": "差异是否在不同输入规模下保持？",
+      "summary": "与第一个问题共享同一次实验和结果。",
+      "campaign": "虚构演示",
+      "method": "演示方法",
+      "status": "已完成",
+      "sources": [
+        "report.md"
+      ]
+    },
+    {
+      "id": "e-demo",
+      "type": "experiment",
+      "title": "虚构缓存对照",
+      "summary": "比较启用与关闭缓存的演示记录。",
+      "campaign": "虚构演示",
+      "method": "演示方法",
+      "status": "已完成",
+      "sources": [
+        "report.md"
+      ]
+    },
+    {
+      "id": "run-demo",
+      "type": "run",
+      "title": "demo-run-01",
+      "summary": "程序生成的虚构数据，不是实测。",
+      "campaign": "虚构演示",
+      "method": "演示方法",
+      "status": "已完成",
+      "sources": [
+        "report.md"
+      ],
+      "provenance": {
+        "synthetic": true,
+        "generator": "examples/demo.json"
+      },
+      "runPath": "demo-run-01"
+    },
+    {
+      "id": "r-demo",
+      "type": "result",
+      "title": "虚构处理时间对照",
+      "summary": "演示表包含 60 行数据，可测试精确数值、筛选和分页。",
+      "campaign": "虚构演示",
+      "method": "演示方法",
+      "status": "已完成",
+      "sources": [
+        "report.md",
+        "measurements.csv",
+        "figure.svg"
+      ],
+      "table": "measurements.csv",
+      "figure": "figure.svg",
+      "conditions": "全部数值均为虚构；仅用于界面与流程演示。"
+    },
+    {
+      "id": "r-repeat",
+      "type": "result",
+      "title": "虚构差异随输入规模变化",
+      "summary": "此记录演示同一运行提供多个结果，以及证据对结论的限定。",
+      "campaign": "虚构演示",
+      "method": "演示方法",
+      "status": "已完成",
+      "sources": [
+        "report.md",
+        "measurements.csv"
+      ],
+      "table": "measurements.csv",
+      "conditions": "没有执行真实重复测量，不提供统计显著性判断。"
+    },
+    {
+      "id": "c-demo",
+      "type": "conclusion",
+      "title": "虚构示例中启用缓存的数值更低",
+      "summary": "只解释演示表中的预设数字。",
+      "campaign": "虚构演示",
+      "method": "演示方法",
+      "status": "有条件支持",
+      "sources": [
+        "report.md"
+      ],
+      "limits": "人工生成数据，不能推断实际软件性能。"
+    },
+    {
+      "id": "c-repeat",
+      "type": "conclusion",
+      "title": "仍需真实重复实验",
+      "summary": "当前演示不能建立实际性能的稳健性。",
+      "campaign": "虚构演示",
+      "method": "演示方法",
+      "status": "待验证",
+      "sources": [
+        "report.md"
+      ],
+      "limits": "缺少真实测量、重复运行和误差评估。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "e-demo",
+      "target": "q-demo",
+      "kind": "investigates",
+      "label": "研究"
+    },
+    {
+      "source": "e-demo",
+      "target": "q-repeat",
+      "kind": "investigates",
+      "label": "同时研究"
+    },
+    {
+      "source": "run-demo",
+      "target": "e-demo",
+      "kind": "executes",
+      "label": "执行"
+    },
+    {
+      "source": "r-demo",
+      "target": "run-demo",
+      "kind": "from_run",
+      "label": "来自运行"
+    },
+    {
+      "source": "r-repeat",
+      "target": "run-demo",
+      "kind": "from_run",
+      "label": "来自运行"
+    },
+    {
+      "source": "r-demo",
+      "target": "c-demo",
+      "kind": "supports",
+      "label": "支持"
+    },
+    {
+      "source": "r-repeat",
+      "target": "c-demo",
+      "kind": "qualifies",
+      "label": "限定"
+    },
+    {
+      "source": "r-repeat",
+      "target": "c-repeat",
+      "kind": "supports",
+      "label": "支持"
+    },
+    {
+      "source": "c-demo",
+      "target": "q-demo",
+      "kind": "answers",
+      "label": "回答"
+    },
+    {
+      "source": "c-repeat",
+      "target": "q-repeat",
+      "kind": "answers",
+      "label": "阶段性回答"
+    }
+  ]
+}

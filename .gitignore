@@ -1,0 +1,24 @@
+# Default deny: only maintained, reviewed public directories are eligible.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/package.json
+!/Start-Workbench.cmd
+!/Stop-Workbench.cmd
+!/src/
+!/public/
+!/codex/
+!/scripts/
+!/tests/
+!/examples/
+# Local research material and generated output never belong in commits.
+/local/
+/data/
+/runtime/
+/acceptance/
+*.sqlite3*
+*.log
+.env
+.env.*
+node_modules/
